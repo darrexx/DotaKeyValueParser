@@ -13,8 +13,8 @@ class ParserTest {
         val path = Paths.get("").toAbsolutePath().toString() + "\\npc_abilities.txt"
         val parser = KeyValueParser(path)
         val keyValue = parser.parseFile()
-        val kv = keyValue.findChildByKey("AbilitySound")
+        val kv = keyValue.findChildByKey("ID")
         assertNotNull(kv)
-        assertEquals("Hero_Antimage.ManaBreak", kv.value)
+        assertEquals("0", kv.value)
     }
 }

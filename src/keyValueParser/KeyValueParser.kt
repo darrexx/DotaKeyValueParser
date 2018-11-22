@@ -46,9 +46,8 @@ class KeyValueParser(path: String) {
                         }
                 }
             }
-            parserState = ParserState.NewKeyValue
             if(key.isEmpty() && value.isEmpty()) continue
-            if(value.isEmpty()){
+            if(value.isEmpty() && parserState!= ParserState.FoundEndOfValue){
                 if(kv?.key.isNullOrEmpty()){
                     kv = KeyValue(key.toString())
                 }
@@ -62,8 +61,10 @@ class KeyValueParser(path: String) {
             else{
                 var tmpKv = KeyValue(key.toString())
                 tmpKv.parent = kv
+                tmpKv.value = value.toString()
                 kv.children.add(tmpKv)
             }
+            parserState = ParserState.NewKeyValue
         }
         return kv
     }
