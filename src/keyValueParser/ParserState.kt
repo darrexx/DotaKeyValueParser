@@ -1,3 +1,5 @@
+package keyValueParser
+
 enum class ParserState {
     FoundStartOfKey,
     FoundEndOfKey,

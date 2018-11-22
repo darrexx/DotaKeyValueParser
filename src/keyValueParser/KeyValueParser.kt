@@ -1,14 +1,16 @@
+package keyValueParser
+
 import java.io.File
 
 class KeyValueParser(path: String) {
 
-    val file: File = File(path)
+    private val file: File = File(path)
 
 
     fun parseFile() : KeyValue{
         val lines = file.readLines()
         var parserState  = ParserState.NewKeyValue
-        var kv : KeyValue = KeyValue(key = "")
+        var kv = KeyValue(key = "")
         for(line in lines){
             val line = line.trim()
             if(line.startsWith("{") || line.startsWith("//")) continue
@@ -52,7 +54,6 @@ class KeyValueParser(path: String) {
                 }
                 else{
                     var tmpKV = KeyValue(key.toString())
-                    tmpKV.value = value.toString()
                     tmpKV.parent = kv
                     kv.children.add(tmpKV)
                     kv = tmpKV
